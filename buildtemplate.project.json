@@ -20,6 +20,11 @@
         "Client": {
           "$path": "buildtemplate/client"
         }
+      },
+      "StarterCharacterScripts": {
+        "ClientChar": {
+          "$path": "buildtemplate/client/clientchar"
+        }
       }
     },
 
