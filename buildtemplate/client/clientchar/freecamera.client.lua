@@ -9,10 +9,11 @@ local UserInputService = game:GetService("UserInputService")
 local movingForward, movingBackward, movingLeft, movingRight = false, false, false, false
 local RunService = game:GetService("RunService") 
 local mouseTwo = false
-local velocityForward = CFrame.new(0, 0, -0.5)
-local velocityBackward = CFrame.new(0, 0, 0.5)
-local velocityLeft = CFrame.new(-0.5, 0, 0)
-local velocityRight = CFrame.new(0.5, 0, 0)
+local velocityForward = CFrame.new(0, 0, -0.3)
+local velocityBackward = CFrame.new(0, 0, 0.3)
+local velocityLeft = CFrame.new(-0.3, 0, 0)
+local velocityRight = CFrame.new(0.3, 0, 0)
+local sensitivity = 0.2
 game.Workspace.CurrentCamera.CFrame = CFrame.new(position, lookAt)
 UserInputService.MouseBehavior = Enum.MouseBehavior.LockCenter
 
@@ -72,7 +73,7 @@ local function onRenderStep()
         if rotationZDeg > 0 or rotationZDeg < 0 then
             camera.CFrame = camera.CFrame * CFrame.Angles(-math.rad(0),-math.rad(0),math.rad(-rotationZDeg))
         end
-        camera.CFrame = camera.CFrame * CFrame.Angles(-math.rad(delta.Y),-math.rad(delta.X),math.rad(0))
+        camera.CFrame = camera.CFrame * CFrame.Angles(-math.rad(delta.Y) * sensitivity,-math.rad(delta.X) * sensitivity,math.rad(0))
     end
 end
 
