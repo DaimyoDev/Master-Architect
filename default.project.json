@@ -20,6 +20,11 @@
         "Client": {
           "$path": "mainmenu/client"
         }
+      },
+      "StarterCharacterScripts": {
+        "ClientChar": {
+          "$path": "mainmenu/client/clientchar"
+        }
       }
     },
 
