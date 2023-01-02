@@ -1,3 +1,4 @@
+local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Knit = require(ReplicatedStorage.Packages.knit)
 local DataStoreService = game:GetService("DataStoreService") 
@@ -10,29 +11,28 @@ local builders = {}
 
 local ServerInfoData = Knit.CreateService { Name = "ServerInfoData", Client = {} }
 
-function ServerInfoData:LoadServerData()
+function ServerInfoData:LoadServerData(player)
 --check to see if there is any server info for this server
-
     local successServer, serverInfo = pcall(function()
-        serverInfoStore:GetAsync(serverId)
+        return serverInfoStore:GetAsync(player.Name)
     end)
 
     if successServer then
         --if there is not data for this server add server to the server info list
         if serverInfo == nil then
             local success, error = pcall(function()
-                serverInfoStore:SetAsync(serverId, serverId)
+                serverInfoStore:SetAsync(player.Name, serverId)
             end)
         end
         --If there is a owner add them to the builders list then update the builder's list
         local successOwner, owner = pcall(function()
-            serverOwner:GetAsync(serverId)
+            return serverOwner:GetAsync(player.Name)
         end)
         if successOwner then
             if owner then
                 table.insert(builders, owner)
                 local success, error = pcall(function()
-                    serverBuildersList:SetAsync(serverId, builders)
+                    serverBuildersList:SetAsync(player.Name, builders)
                 end)
             end
         end
@@ -46,7 +46,7 @@ end
 --after join data is detected which should only be the owner set the owner
 function ServerInfoData:SetOwner(player)
     local success, error = pcall(function()
-        serverOwner:SetAsync(serverId, player)
+        serverOwner:SetAsync(player.Name, player.Name)
     end)
 end
 
