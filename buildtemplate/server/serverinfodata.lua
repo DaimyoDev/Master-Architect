@@ -43,25 +43,22 @@ function ServerInfoData:SaveData()
 
 
 end
-
---check to see if the player is the owner of this server
-function ServerInfoData:CheckIfOwner(player)
---see if the player owns a server
-    local success, server = pcall(function()
-        serverList:GetAsync(player.Name)
+--after join data is detected which should only be the owner set the owner
+function ServerInfoData:SetOwner(player)
+    local success, error = pcall(function()
+        serverOwner:SetAsync(serverId, player)
     end)
-    if success then
-        --if the player owns a server see if the server they own is this one
-        print(server, serverId)
-        if server == serverId then
-            local success, error = pcall(function()
-                serverOwner:SetAsync(serverId, player.Name)
-            end)
-        end
-    end
 end
 
+
+
+
+--Load server permissions list
+
+
+
 --Update server info functions
+
 
 function ServerInfoData:AddToServerBuildersList(player)
 
