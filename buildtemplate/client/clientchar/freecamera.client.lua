@@ -4,7 +4,6 @@ camera.CameraType = Enum.CameraType.Scriptable
 local position = Vector3.new(cameraSpawn.Position.x, cameraSpawn.Position.y + 4, cameraSpawn.Position.z)
 local lookAt = Vector3.new(cameraSpawn.Orientation.x - 50, cameraSpawn.Orientation.y, cameraSpawn.Orientation.z)
 local player = game.Players.LocalPlayer
-local character = player.Character
 local UserInputService = game:GetService("UserInputService")
 local movingForward, movingBackward, movingLeft, movingRight = false, false, false, false
 local RunService = game:GetService("RunService") 
@@ -16,6 +15,7 @@ local velocityRight = CFrame.new(0.3, 0, 0)
 local sensitivity = 0.2
 game.Workspace.CurrentCamera.CFrame = CFrame.new(position, lookAt)
 UserInputService.MouseBehavior = Enum.MouseBehavior.LockCenter
+
 
 player.CharacterAdded:Connect(function(character)
     local humanoid = character:WaitForChild("Humanoid")
@@ -41,25 +41,21 @@ UserInputService.InputBegan:Connect(function(input)
     if input.UserInputType == Enum.UserInputType.MouseButton2 then
         mouseTwo = true
     end
-   
+
     while movingForward do
         task.wait(0.01)
-        local lookVector = camera.CFrame.LookVector
         camera.CFrame = camera.CFrame * velocityForward
     end
     while movingBackward do
         task.wait(0.01)
-        local lookVector = camera.CFrame.LookVector
         camera.CFrame = camera.CFrame * velocityBackward
     end
     while movingLeft do
         task.wait(0.01)
-        local lookVector = camera.CFrame.LookVector
         camera.CFrame = camera.CFrame * velocityLeft
     end
     while movingRight do
         task.wait(0.01)
-        local lookVector = camera.CFrame.LookVector
         camera.CFrame = camera.CFrame * velocityRight
     end
 end)

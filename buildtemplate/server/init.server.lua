@@ -1,1 +1,3 @@
-print("Hello world, from server!")
+local Knit = require(game:GetService("ReplicatedStorage").Packages.knit)
+
+Knit.Start():catch(warn)
