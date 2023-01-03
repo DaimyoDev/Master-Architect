@@ -3,7 +3,9 @@ local ServerInfoData = require(script.serverinfodata)
 local Players = game:GetService("Players")
 local reservedServerCode
 
-Knit.AddServicesDeep(script)
+require(script.playeruihandler)
+require(script.serverinfodata)
+require(script.roactcomponents)
 
 Knit.Start():catch(warn)
 

@@ -1,7 +1,8 @@
 --This script will handle regarding the display and events of the player ui
 local Knit = require(game:GetService("ReplicatedStorage").Packages.knit)
+local Packages = game:GetService("ReplicatedStorage").Packages
 local PlayerUIHandler = Knit.CreateService {Name = "PlayerUIHandler", Client = {}}
-local Signal = require(Knit.Util.Signal)
+local Signal = require(Packages.Signal)
 local Roact = game:GetService("ReplicatedStorage").Roact
 PlayerUIHandler.BrickListButtonOpen = Signal.new()
 
@@ -13,12 +14,8 @@ function PlayerUIHandler:BrickListButtonHandler(player)
 
 end
 
-function PlayerUIHandler:CreateBuildUIFromBuildersList(buildersList)
-    --check to see if the player is inside of the builders list from the server info data.
-    for index, key in ipairs(buildersList) do
-       --create build ui
-       print(key)
-    end
+function PlayerUIHandler:CreateBuildUI()
+    --build the ui for each builder in the builders list
 end
 
 return PlayerUIHandler

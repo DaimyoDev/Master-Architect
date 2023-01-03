@@ -5,11 +5,15 @@ local serverInfoStore = DataStoreService:GetDataStore("ServerInfoStore")
 local serverOwner = DataStoreService:GetDataStore("ServerInfoStore", "owner")
 local serverBuildersList = DataStoreService:GetDataStore("ServerInfoStore", "builders")
 local serverId = game.PrivateServerId
-local PlayerUIHandler = Knit.GetService("PlayerUIHandler")
-
 local ServerInfoData = Knit.CreateService { Name = "ServerInfoData" }
+local PlayerUIHandler
 
 ServerInfoData.builders = {}
+
+function ServerInfoData:KnitStart()
+    PlayerUIHandler = Knit.GetService("PlayerUIHandler")
+
+end
 
 function ServerInfoData:LoadServerData(player)
 --check to see if there is any server info for this server
@@ -26,15 +30,15 @@ function ServerInfoData:LoadServerData(player)
         end
         --load the builders list and update the ServerInfoData.builders property
         local success, buildersList = pcall(function()
-            serverBuildersList:GetAsync(player.Name)
+            return serverBuildersList:GetAsync(player.Name)
         end)
         if success then
             --if the builders list is not empty update the ServerInfoData.builders property
             if buildersList ~= {} or buildersList ~= nil then
                 ServerInfoData.builders = buildersList
-                print(ServerInfoData.builders)
-                --call the player ui handler and pass in the builders list
-                PlayerUIHandler.CreateBuildUIFromBuildersList(buildersList)
+                for index, builder in ipairs(buildersList) do
+                    PlayerUIHandler.CreateBuildUI()
+                end
             end
         end
     end

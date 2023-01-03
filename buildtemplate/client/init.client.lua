@@ -1,5 +1,5 @@
 local Knit = require(game:GetService("ReplicatedStorage").Packages.knit)
 
-Knit.AddServicesDeep(script)
+require(script.clientuihandler)
 
 Knit.Start():catch(warn)

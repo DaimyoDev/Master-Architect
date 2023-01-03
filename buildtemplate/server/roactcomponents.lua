@@ -10,7 +10,6 @@ function RoactComponents.BrickListButton(props)
         Image = "rbxasset://textures/ui/GuiImagePlaceholder.png",
         Size = UDim2.new(0, 175, 0, 77)
     })
-
-
-
 end
+
+return RoactComponents

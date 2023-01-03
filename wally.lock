@@ -5,7 +5,7 @@ registry = "test"
 [[package]]
 name = "daimyo/master-architect"
 version = "0.1.0"
-dependencies = [["knit", "sleitnick/knit@1.4.7"]]
+dependencies = [["Signal", "sleitnick/signal@1.2.1"], ["knit", "sleitnick/knit@1.4.7"]]
 
 [[package]]
 name = "evaera/promise"
