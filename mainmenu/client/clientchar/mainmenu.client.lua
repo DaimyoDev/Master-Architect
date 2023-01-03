@@ -1,5 +1,4 @@
 local player = game.Players.LocalPlayer
-local character = player.Character
 local StarterGui = game:GetService("StarterGui")
 local buildCreationButton = player:WaitForChild("PlayerGui"):WaitForChild("MainMenu")["Menu Frame"].BuildCreation
 local startBuildServer = game.ReplicatedStorage.StartBuildServer
