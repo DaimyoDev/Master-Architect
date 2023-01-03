@@ -11,6 +11,4 @@ function ClientUIEventsHandler:OnBrickListButtonClick()
     PlayerUIHandler.BrickListButtonOpen:Fire()
 end
 
---check to see if the player has the brick list button. If they do fire the event. They will only have it if they have permission to build stuff.
-
 return ClientUIEventsHandler

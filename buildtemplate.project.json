@@ -6,9 +6,6 @@
     "ReplicatedStorage": {
       "Common": {
         "$path": "buildtemplate/shared"
-      },
-      "Packages": {
-        "$path": "Packages"
       }
     },
 

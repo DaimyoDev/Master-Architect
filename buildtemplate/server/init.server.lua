@@ -1,15 +1,9 @@
-local Knit = require(game:GetService("ReplicatedStorage").Packages.knit)
-local ServerInfoData = require(script.serverinfodata)
 local Players = game:GetService("Players")
+local ServerInfoData = require(script.serverinfodata)
 local reservedServerCode
 
-require(script.playeruihandler)
-require(script.serverinfodata)
-require(script.roactcomponents)
-
-Knit.Start():catch(warn)
-
 Players.PlayerAdded:Connect(function(player)
+    ServerInfoData:LoadServerData(player)
     local joinData = player:GetJoinData()
     local teleportData = joinData.TeleportData
     --The only person with join data should be the owner of the server when it is first created players joining from the join creation button will not send join data.
