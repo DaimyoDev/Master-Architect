@@ -1,4 +1,3 @@
---DataStore Variables and serverId
 local DataStoreService = game:GetService("DataStoreService") 
 local serverInfoStore = DataStoreService:GetDataStore("ServerInfoStore")
 local serverOwner = DataStoreService:GetDataStore("ServerInfoStore", "owner")
@@ -6,6 +5,7 @@ local serverBuildersList = DataStoreService:GetDataStore("ServerInfoStore", "bui
 local OnBuilderListLoaded = game:GetService("ServerStorage").OnBuilderListLoaded
 local OnOwner = game:GetService("ServerStorage").OnOwnerLoaded
 local Owner = game:GetService("ServerStorage").Owner
+local serverPassword = DataStoreService:GetDataStore("ServerList", "password")
 local serverId = game.PrivateServerId
 
 
@@ -73,6 +73,20 @@ function ServerInfoData:AddToServerBuildersList(player)
 --when player adds someone to the builders list we will fire an event that will then call load build ui for that player
 
 
+end
+
+function ServerInfoData:RemoveFromServerBuildersList(player)
+
+
+end
+
+function updatePassword(player, password)
+--check to see if the person changing the password is the owner and then set the new password into the data store.
+    if player.Name == Owner then
+        local success, error = pcall(function()
+            serverPassword:SetAsync(player.Name, password)
+        end)
+    end
 end
 
 return ServerInfoData

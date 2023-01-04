@@ -13,13 +13,35 @@ local velocityBackward = CFrame.new(0, 0, 0.3)
 local velocityLeft = CFrame.new(-0.3, 0, 0)
 local velocityRight = CFrame.new(0.3, 0, 0)
 local sensitivity = 0.2
+local TogglePlayMode = game.ReplicatedStorage.TogglePlayMode
+local humanoidRootPart
 game.Workspace.CurrentCamera.CFrame = CFrame.new(position, lookAt)
+
+--if play mode then set camera type and change humanoid root part.
 
 player.CharacterAdded:Connect(function(character)
     local humanoid = character:WaitForChild("Humanoid")
-    local humanoidRootPart = humanoid.RootPart
+    humanoidRootPart = humanoid.RootPart
     humanoidRootPart.Anchored = true
     humanoidRootPart.CanCollide = false
+end)
+
+TogglePlayMode.OnClientEvent:Connect(function(playMode)
+    if playMode == "false" then
+        camera.CameraType = Enum.CameraType.Custom
+        local success, error = pcall(function()
+            humanoidRootPart.Anchored = false
+            humanoidRootPart.CanCollide = true
+        end)
+    end
+    if playMode == "true" then
+        camera.CameraType = Enum.CameraType.Scriptable
+        local success, error = pcall(function()
+            humanoidRootPart.Anchored = true
+            humanoidRootPart.CanCollide = false
+        end)
+    end
+    
 end)
 
 UserInputService.InputBegan:Connect(function(input)

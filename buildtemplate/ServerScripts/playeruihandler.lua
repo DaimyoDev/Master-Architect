@@ -3,6 +3,8 @@ local ChangeBrickList = game.ReplicatedStorage.ChangeBrickList
 local Owner = game:GetService("ServerStorage").Owner
 local brickList = {"Brick1x1", "Brick2x1", "Brick1x2", "Brick2x2"}
 local AddBrick = game.ReplicatedStorage.AddBrick
+local TogglePlayMode = game.ReplicatedStorage.TogglePlayMode
+local playMode = false
 local PlayerUIHandler = {}
 
 PlayerUIHandler.buildersList = {}
@@ -66,6 +68,20 @@ function PlayerUIHandler:OnBrickListButtonClick(player, brickType, camera, camer
                     if brickType == "Brick2x1" then
                         newBrick.Size = Vector3.new(2, 1, 1)
                     end
+                    local clicked = false
+                    local clickDetector = Instance.new("ClickDetector")
+                    clickDetector.MaxActivationDistance = 90000000
+                    clickDetector.Parent = newBrick
+                    clickDetector.MouseClick:Connect(function()
+                        if clicked == false then
+                            clicked = true
+                            newBrick.Transparency = 0.3
+                            --send a remote event to the server that a brick has been selected and when you are able to move it with click and drag. Make sure that you can't move the brick through collisions. I'll make an option to where you can in the future.
+                        else
+                            clicked = false
+                            newBrick.Transparency = 0
+                        end
+                    end)
                     player.PlayerGui.BrickList.Enabled = false
                 end
             end
@@ -109,6 +125,21 @@ function PlayerUIHandler:BrickListButtonHandler(player)
     end
 end
 
+function PlayerUIHandler:UnloadBrickListButton(player)
+    if playMode == false then
+        player.PlayerGui.BuildUI.BrickListButton.Active = false
+        player.PlayerGui.BuildUI.BrickListButton.Visible = false
+        TogglePlayMode:FireClient(player, "false")
+        playMode = true
+    else
+        player.PlayerGui.BuildUI.BrickListButton.Active = true
+        player.PlayerGui.BuildUI.BrickListButton.Visible = true
+        TogglePlayMode:FireClient(player, "true")
+        playMode = false
+    end
+end
+
+TogglePlayMode.OnServerEvent:Connect(PlayerUIHandler.UnloadBrickListButton)
 ChangeBrickList.OnServerEvent:Connect(PlayerUIHandler.BrickListButtonHandler)
 AddBrick.OnServerEvent:Connect(PlayerUIHandler.OnBrickListButtonClick)
 
