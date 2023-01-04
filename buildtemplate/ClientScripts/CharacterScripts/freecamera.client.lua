@@ -14,7 +14,6 @@ local velocityLeft = CFrame.new(-0.3, 0, 0)
 local velocityRight = CFrame.new(0.3, 0, 0)
 local sensitivity = 0.2
 game.Workspace.CurrentCamera.CFrame = CFrame.new(position, lookAt)
-UserInputService.MouseBehavior = Enum.MouseBehavior.LockCenter
 
 player.CharacterAdded:Connect(function(character)
     local humanoid = character:WaitForChild("Humanoid")
@@ -89,7 +88,7 @@ UserInputService.InputEnded:Connect(function(input)
     end
     if input.UserInputType == Enum.UserInputType.MouseButton2 then
         mouseTwo = false
-        UserInputService.MouseBehavior = Enum.MouseBehavior.LockCenter
+        UserInputService.MouseBehavior = Enum.MouseBehavior.Default
     end
 end)
 

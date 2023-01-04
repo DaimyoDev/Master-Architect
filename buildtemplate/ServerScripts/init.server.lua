@@ -9,8 +9,10 @@ local reservedServerCode
 
 --When players join see if they are the owner.
 Players.PlayerAdded:Connect(function(player)
+    --for now keep these for debugging purposes
     ServerInfoData:LoadServerData(player)
     ServerInfoData:SetOwner(player)
+    -- these two lines above should be kept for debugging purposes
     local joinData = player:GetJoinData()
     local teleportData = joinData.TeleportData
     --The only person with join data should be the owner of the server when it is first created players joining from the join creation button will not send join data.
