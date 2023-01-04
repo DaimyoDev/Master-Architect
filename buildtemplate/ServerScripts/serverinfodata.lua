@@ -3,13 +3,13 @@ local DataStoreService = game:GetService("DataStoreService")
 local serverInfoStore = DataStoreService:GetDataStore("ServerInfoStore")
 local serverOwner = DataStoreService:GetDataStore("ServerInfoStore", "owner")
 local serverBuildersList = DataStoreService:GetDataStore("ServerInfoStore", "builders")
+local OnBuilderListLoaded = game:GetService("ServerStorage").OnBuilderListLoaded
+local OnOwner = game:GetService("ServerStorage").OnOwnerLoaded
+local Owner = game:GetService("ServerStorage").Owner
 local serverId = game.PrivateServerId
 
+
 local ServerInfoData = {}
-
-
---Variables for the ServerInfoData service and signals
-ServerInfoData.builders = {}
 
 function ServerInfoData:LoadServerData(player)
 --check to see if there is any server info for this server
@@ -31,7 +31,7 @@ function ServerInfoData:LoadServerData(player)
         if success then
             --if the builders list is not empty update the ServerInfoData.builders property
             if buildersList ~= {} or buildersList ~= nil then
-                self.builders = buildersList
+                OnBuilderListLoaded:Fire(buildersList)
             end
         end
     end
@@ -49,7 +49,10 @@ function ServerInfoData:SetOwner(player)
     end)
     if successOwner then
         if owner ~= nil then
-            --PlayerUIHandler.CreateCreationSettings()
+            Owner.Value = owner
+            OnOwner:Fire(player.Name)
+            --fire event that owner has been set
+            
         end
         if owner == nil then
             table.insert(self.builders, player.Name)
@@ -67,7 +70,7 @@ end
 
 
 function ServerInfoData:AddToServerBuildersList(player)
-
+--when player adds someone to the builders list we will fire an event that will then call load build ui for that player
 
 
 end

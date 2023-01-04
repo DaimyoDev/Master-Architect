@@ -11,19 +11,19 @@
 
     "ServerScriptService": {
       "Server": {
-        "$path": "buildtemplate/server"
+        "$path": "buildtemplate/ServerScripts"
       }
     },
 
     "StarterPlayer": {
       "StarterPlayerScripts": {
         "Client": {
-          "$path": "buildtemplate/client"
+          "$path": "buildtemplate/ClientScripts"
         }
       },
       "StarterCharacterScripts": {
-        "ClientChar": {
-          "$path": "buildtemplate/client/clientchar"
+        "CharacterScripts": {
+          "$path": "buildtemplate/ClientScripts/CharacterScripts"
         }
       }
     },

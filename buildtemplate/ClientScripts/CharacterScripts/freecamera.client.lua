@@ -16,7 +16,6 @@ local sensitivity = 0.2
 game.Workspace.CurrentCamera.CFrame = CFrame.new(position, lookAt)
 UserInputService.MouseBehavior = Enum.MouseBehavior.LockCenter
 
-
 player.CharacterAdded:Connect(function(character)
     local humanoid = character:WaitForChild("Humanoid")
     local humanoidRootPart = humanoid.RootPart
