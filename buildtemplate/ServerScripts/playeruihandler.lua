@@ -72,15 +72,19 @@ function PlayerUIHandler:OnBrickListButtonClick(player, brickType, camera, camer
                     local clickDetector = Instance.new("ClickDetector")
                     clickDetector.MaxActivationDistance = 90000000
                     clickDetector.Parent = newBrick
-                    clickDetector.MouseClick:Connect(function()
-                        if clicked == false then
-                            clicked = true
-                            newBrick.Transparency = 0.3
-                            --send a remote event to the server that a brick has been selected and when you are able to move it with click and drag. Make sure that you can't move the brick through collisions. I'll make an option to where you can in the future.
-                        else
-                            clicked = false
-                            newBrick.Transparency = 0
+                    clickDetector.MouseClick:Connect(function(player)
+                        local isBuilder = table.find(PlayerUIHandler.buildersList, player.Name)
+                        if isBuilder ~= nil then
+                            if clicked == false then
+                                clicked = true
+                                newBrick.Transparency = 0.3
+                                --send a remote event to the server that a brick has been selected and when you are able to move it with click and drag. Make sure that you can't move the brick through collisions. I'll make an option to where you can in the future.
+                            else
+                                clicked = false
+                                newBrick.Transparency = 0
+                            end
                         end
+                        
                     end)
                     player.PlayerGui.BrickList.Enabled = false
                 end
