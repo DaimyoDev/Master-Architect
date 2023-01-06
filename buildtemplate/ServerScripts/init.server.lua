@@ -28,6 +28,9 @@ Players.PlayerAdded:Connect(function(player)
             print(error)
         end
     end
+    if teleportData == {} then
+        ServerInfoData:LoadBuildUI(player.Name)
+    end
 end)
 
 --when the builders list is loaded update the player ui handler builders list

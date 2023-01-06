@@ -4,6 +4,7 @@ local Owner = game:GetService("ServerStorage").Owner
 local brickList = {"Brick1x1", "Brick2x1", "Brick1x2", "Brick2x2"}
 local AddBrick = game.ReplicatedStorage.AddBrick
 local TogglePlayMode = game.ReplicatedStorage.TogglePlayMode
+local OpenCreationSettings= game.ReplicatedStorage.OpenCreationSettings
 local playMode = false
 local PlayerUIHandler = {}
 
@@ -117,7 +118,9 @@ function PlayerUIHandler:LoadCreationSettingsButton(player)
 end
 
 function PlayerUIHandler:CreationSettingsButtonHandler(player)
-    --check to see if the player is a player and if they are the owner if not reject them
+    if player.Name == Owner.Value then
+        player.PlayerGui.CreationSettings.Enabled = true
+    end
 end
 
 function PlayerUIHandler:BrickListButtonHandler(player)
@@ -146,5 +149,6 @@ end
 TogglePlayMode.OnServerEvent:Connect(PlayerUIHandler.UnloadBrickListButton)
 ChangeBrickList.OnServerEvent:Connect(PlayerUIHandler.BrickListButtonHandler)
 AddBrick.OnServerEvent:Connect(PlayerUIHandler.OnBrickListButtonClick)
+OpenCreationSettings.OnServerEvent:Connect(PlayerUIHandler.CreationSettingsButtonHandler)
 
 return PlayerUIHandler

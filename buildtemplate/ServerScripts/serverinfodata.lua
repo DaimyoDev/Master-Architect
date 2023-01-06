@@ -7,6 +7,7 @@ local OnOwner = game:GetService("ServerStorage").OnOwnerLoaded
 local Owner = game:GetService("ServerStorage").Owner
 local serverPassword = DataStoreService:GetDataStore("ServerList", "password")
 local serverId = game.PrivateServerId
+local SetPassword = game.ReplicatedStorage.SetPassword
 
 
 local ServerInfoData = {}
@@ -81,12 +82,21 @@ function ServerInfoData:RemoveFromServerBuildersList(player)
 end
 
 function updatePassword(player, password)
+    print(player)
 --check to see if the person changing the password is the owner and then set the new password into the data store.
-    if player.Name == Owner then
+    if player.Name == Owner.Value then
         local success, error = pcall(function()
-            serverPassword:SetAsync(player.Name, password)
+            serverPassword:SetAsync(player.Name, tostring(password))
         end)
+        if success then
+            print(password)
+        end
+        if error then
+            print(error)
+        end
     end
 end
+
+SetPassword.OnServerEvent:Connect(updatePassword)
 
 return ServerInfoData
