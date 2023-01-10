@@ -5,6 +5,7 @@ local brickList = {"Brick1x1", "Brick2x1", "Brick1x2", "Brick2x2"}
 local AddBrick = game.ReplicatedStorage.AddBrick
 local TogglePlayMode = game.ReplicatedStorage.TogglePlayMode
 local OpenCreationSettings= game.ReplicatedStorage.OpenCreationSettings
+local BrickSelected = game.ReplicatedStorage.BrickSelected
 local playMode = false
 local PlayerUIHandler = {}
 
@@ -79,9 +80,10 @@ function PlayerUIHandler:OnBrickListButtonClick(player, brickType, camera, camer
                             if clicked == false then
                                 clicked = true
                                 newBrick.Transparency = 0.3
-                                --send a remote event to the server that a brick has been selected and when you are able to move it with click and drag. Make sure that you can't move the brick through collisions. I'll make an option to where you can in the future.
+                                BrickSelected:FireClient(player, newBrick, clicked)
                             else
                                 clicked = false
+                                BrickSelected:FireClient(player, newBrick, clicked)
                                 newBrick.Transparency = 0
                             end
                         end
