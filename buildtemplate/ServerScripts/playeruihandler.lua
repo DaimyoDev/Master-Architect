@@ -2,7 +2,7 @@
 local ChangeBrickList = game.ReplicatedStorage.ChangeBrickList
 local CollectionService = game:GetService("CollectionService")
 local Owner = game:GetService("ServerStorage").Owner
-local brickList = {"Brick1x1", "Brick2x1", "Brick1x2", "Brick2x2"}
+local brickList = {"Brick1x1", "Brick2x1", "Brick1x2", "Brick2x2", "Brick2x2x2", "Brick3x2", "Brick3x3", "Brick5x1", "Brick1x5x1"}
 local AddBrick = game.ReplicatedStorage.AddBrick
 local TogglePlayMode = game.ReplicatedStorage.TogglePlayMode
 local OpenCreationSettings= game.ReplicatedStorage.OpenCreationSettings
@@ -37,6 +37,21 @@ function PlayerUIHandler:OnBrickListButtonClick(player, brickType)
                     end
                     if brickType == "Brick2x1" then
                         newBrick.Size = Vector3.new(2, 1, 1)
+                    end
+                    if brickType == "Brick3x3" then
+                        newBrick.Size = Vector3.new(3, 1, 3)
+                    end
+                    if brickType == "Brick3x2" then
+                        newBrick.Size = Vector3.new(3, 1, 2)
+                    end
+                    if brickType == "Brick5x1" then
+                        newBrick.Size = Vector3.new(5, 1, 1)
+                    end
+                    if brickType == "Brick2x2x2" then
+                        newBrick.Size = Vector3.new(2, 2, 2)
+                    end
+                    if brickType == "Brick1x5x1" then
+                        newBrick.Size = Vector3.new(1, 5, 1)
                     end
                     local clicked = false
                     local clickDetector = Instance.new("ClickDetector")
