@@ -17,7 +17,7 @@ local function moveBrick(newBrick)
        end
     end
     while CollectionService:HasTag(newBrick, "Selected") do
-        task.wait(0.1)
+        task.wait(0.05)
         if UserInputService:IsKeyDown(Enum.KeyCode.I) then 
             newBrick.Position = newBrick.Position + Vector3.new(0, 0, 0.5)
         end
