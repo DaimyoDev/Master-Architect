@@ -9,6 +9,9 @@ local OpenCreationSettings= game.ReplicatedStorage.OpenCreationSettings
 local BrickSelected = game.ReplicatedStorage.BrickSelected
 local playMode = false
 local PlayerUIHandler = {}
+local CloneBricks = game.ReplicatedStorage.CloneBricks
+local UpdateBrick = game.ReplicatedStorage.UpdateBrick
+local DeleteBrick = game.ReplicatedStorage.DeleteBrick
 
 PlayerUIHandler.buildersList = {}
 
@@ -80,6 +83,38 @@ function PlayerUIHandler:OnBrickListButtonClick(player, brickType)
         end
     end
 
+function PlayerUIHandler:CloneBricks(brick, brickCFrame)
+    local clonedBrick = brick:Clone()
+    clonedBrick.Transparency = 0
+    clonedBrick.CFrame = brickCFrame
+    clonedBrick.Parent = game.Workspace
+    local clicked = false
+    clonedBrick.ClickDetector.MouseClick:Connect(function(player)
+        local isBuilder = table.find(PlayerUIHandler.buildersList, player.Name)
+        if isBuilder ~= nil then
+            if clicked == false then
+                clicked = true
+                clonedBrick.Transparency = 0.3
+                CollectionService:AddTag(clonedBrick, "Selected")
+                BrickSelected:FireClient(player, clonedBrick, clicked)
+            else
+                clicked = false
+                CollectionService:RemoveTag(clonedBrick, "Selected")
+                BrickSelected:FireClient(player, clonedBrick, clicked)
+                clonedBrick.Transparency = 0
+            end
+        end                 
+    end)
+end
+
+function PlayerUIHandler:UpdateBrick(brick, brickCFrame)
+    brick.CFrame = brickCFrame
+end
+
+function PlayerUIHandler:DeleteBrick(brick)
+    brick:Destroy()
+end
+
 function PlayerUIHandler:UpdateBuildersList(newBuildersList)
     self.buildersList = newBuildersList
 end
@@ -135,5 +170,8 @@ TogglePlayMode.OnServerEvent:Connect(PlayerUIHandler.UnloadBrickListButton)
 ChangeBrickList.OnServerEvent:Connect(PlayerUIHandler.BrickListButtonHandler)
 AddBrick.OnServerEvent:Connect(PlayerUIHandler.OnBrickListButtonClick)
 OpenCreationSettings.OnServerEvent:Connect(PlayerUIHandler.CreationSettingsButtonHandler)
+CloneBricks.OnServerEvent:Connect(PlayerUIHandler.CloneBricks)
+UpdateBrick.OnServerEvent:Connect(PlayerUIHandler.UpdateBrick)
+DeleteBrick.OnServerEvent:Connect(PlayerUIHandler.DeleteBrick)
 
 return PlayerUIHandler

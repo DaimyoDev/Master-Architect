@@ -3,9 +3,10 @@ local CollectionService = game:GetService("CollectionService")
 local UserInputService = game:GetService("UserInputService")
 local BrickSelected = game.ReplicatedStorage.BrickSelected
 local bricksSelected = {}
+local CloneBricks = game.ReplicatedStorage.CloneBricks
+local UpdateBrick = game.ReplicatedStorage.UpdateBrick
+local DeleteBrick = game.ReplicatedStorage.DeleteBrick
 local moveSpeedChanger = game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("BuildUI").MoveBricks.TextBox
-print(tonumber(moveSpeedChanger.Text))
-local camera = game.Workspace.CurrentCamera
 
 local function moveBrick(newBrick)
     if CollectionService:HasTag(newBrick, "Selected") then
@@ -50,7 +51,22 @@ UserInputService.InputBegan:Connect(function(input)
             brick.CFrame = brick.CFrame:ToWorldSpace(rotatedXCFrame)
         end
         if input.KeyCode == Enum.KeyCode.Delete then
-            brick:Destroy()
+            local index = table.find(bricksSelected, brick)
+            if index ~= nil then
+                table.remove(bricksSelected, index)
+            end
+            DeleteBrick:FireServer(brick)
+        end
+        if input.KeyCode == Enum.KeyCode.C then
+            CloneBricks:FireServer(brick, brick.CFrame)
+        end
+    end
+end)
+
+UserInputService.InputEnded:Connect(function(input)
+    if input.KeyCode == Enum.KeyCode.R or input.KeyCode == Enum.KeyCode.F or input.KeyCode == Enum.KeyCode.I or input.KeyCode == Enum.KeyCode.K or input.KeyCode == Enum.KeyCode.J or input.KeyCode == Enum.KeyCode.L or input.KeyCode == Enum.KeyCode.U or input.KeyCode == Enum.KeyCode.O then
+        for index, brick in ipairs(bricksSelected) do
+            UpdateBrick:FireServer(brick, brick.CFrame)
         end
     end
 end)
