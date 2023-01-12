@@ -7,6 +7,12 @@ local CloneBricks = game.ReplicatedStorage.CloneBricks
 local UpdateBrick = game.ReplicatedStorage.UpdateBrick
 local DeleteBrick = game.ReplicatedStorage.DeleteBrick
 local moveSpeedChanger = game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("BuildUI").MoveBricks.TextBox
+local player = game:GetService("Players").LocalPlayer
+
+local colorsList = game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("ColorsList")
+local ColorChosen = game.ReplicatedStorage.ColorChosen
+local brickColorList = colorsList.BrickColor
+local Black, Blue, Brown, Green, Orange, Pink, Purple, Red, Yellow = brickColorList.Black, brickColorList.Blue, brickColorList.Brown, brickColorList.Green, brickColorList.Orange, brickColorList.Pink, brickColorList.Purple, brickColorList.Red, brickColorList.Yellow
 
 local function moveBrick(newBrick)
     if CollectionService:HasTag(newBrick, "Selected") then
@@ -65,9 +71,11 @@ end)
 
 UserInputService.InputEnded:Connect(function(input)
     if input.KeyCode == Enum.KeyCode.R or input.KeyCode == Enum.KeyCode.F or input.KeyCode == Enum.KeyCode.I or input.KeyCode == Enum.KeyCode.K or input.KeyCode == Enum.KeyCode.J or input.KeyCode == Enum.KeyCode.L or input.KeyCode == Enum.KeyCode.U or input.KeyCode == Enum.KeyCode.O then
+        local bricksSelectedCFrames = {}
         for index, brick in ipairs(bricksSelected) do
-            UpdateBrick:FireServer(brick, brick.CFrame)
+            table.insert(bricksSelectedCFrames, brick.CFrame)
         end
+        UpdateBrick:FireServer(bricksSelected, bricksSelectedCFrames)
     end
 end)
 
@@ -75,5 +83,48 @@ BrickSelected.OnClientEvent:Connect(function(newBrick, clicked)
         moveBrick(newBrick)
 end)
 
+Black.Activated:Connect(function() 
+    ColorChosen:FireServer(player, bricksSelected, "Black")
+    colorsList.Enabled = false
+end)
 
+Blue.Activated:Connect(function() 
+    ColorChosen:FireServer(player, bricksSelected, "Blue")
+    colorsList.Enabled = false
+end)
+
+Brown.Activated:Connect(function() 
+    ColorChosen:FireServer(player, bricksSelected, "Brown")
+    colorsList.Enabled = false
+end)
+
+Green.Activated:Connect(function() 
+    ColorChosen:FireServer(player, bricksSelected, "Green")
+    colorsList.Enabled = false
+end)
+
+Orange.Activated:Connect(function() 
+    ColorChosen:FireServer(player, bricksSelected, "Orange")
+    colorsList.Enabled = false
+end)
+
+Pink.Activated:Connect(function() 
+    ColorChosen:FireServer(player, bricksSelected, "Pink")
+    colorsList.Enabled = false
+end)
+
+Purple.Activated:Connect(function() 
+    ColorChosen:FireServer(player, bricksSelected, "Purple")
+    colorsList.Enabled = false
+end)
+
+Red.Activated:Connect(function() 
+    ColorChosen:FireServer(player, bricksSelected, "Red")
+    colorsList.Enabled = false
+end)
+
+Yellow.Activated:Connect(function() 
+    ColorChosen:FireServer(player, bricksSelected, "Yellow")
+    colorsList.Enabled = false
+end)
 

@@ -12,6 +12,8 @@ local PlayerUIHandler = {}
 local CloneBricks = game.ReplicatedStorage.CloneBricks
 local UpdateBrick = game.ReplicatedStorage.UpdateBrick
 local DeleteBrick = game.ReplicatedStorage.DeleteBrick
+local OpenColorList = game.ReplicatedStorage.OpenColorList
+local ColorChosen = game.ReplicatedStorage.ColorChosen
 
 PlayerUIHandler.buildersList = {}
 
@@ -107,8 +109,11 @@ function PlayerUIHandler:CloneBricks(brick, brickCFrame)
     end)
 end
 
-function PlayerUIHandler:UpdateBrick(brick, brickCFrame)
-    brick.CFrame = brickCFrame
+function PlayerUIHandler:UpdateBrick(brickList, brickListCFrames)
+    for index, brick in ipairs(brickList) do
+        local brickCFrame = brickListCFrames[index]
+        brick.CFrame = brickCFrame
+    end
 end
 
 function PlayerUIHandler:DeleteBrick(brick)
@@ -127,6 +132,52 @@ function PlayerUIHandler:LoadBuildUI(builder)
             for index, player in ipairs(PlayersList) do
                 if player.Name == builder then
                     player.PlayerGui.BuildUI.Enabled = true
+                end
+            end
+        end
+    end
+end
+
+function PlayerUIHandler:LoadColorList(player)
+    if player.Name then
+        local isBuilder = table.find(PlayerUIHandler.buildersList, player.Name)
+        if isBuilder ~= nil then
+        player.PlayerGui.ColorsList.Enabled = true
+        end
+    end
+end
+
+function PlayerUIHandler:SetBrickColor(player, brickList, color)
+    if player.Name then
+        local isBuilder = table.find(PlayerUIHandler.buildersList, player.Name)
+        if isBuilder ~= nil then
+            for index, brick in ipairs(brickList) do
+                if color == "Black" then
+                    brick.Color = Color3.fromRGB(0, 0, 0)
+                end
+                if color == "Blue" then
+                    brick.Color = Color3.fromRGB(20, 24, 255)
+                end
+                if color == "Brown" then
+                    brick.Color = Color3.fromRGB(95, 47, 15)
+                end
+                if color == "Green" then
+                    brick.Color = Color3.fromRGB(13, 135, 21)
+                end
+                if color == "Orange" then
+                    brick.Color = Color3.fromRGB(255, 170, 0)
+                end
+                if color == "Pink" then
+                    brick.Color = Color3.fromRGB(255, 49, 245)
+                end
+                if color == "Purple" then
+                    brick.Color = Color3.fromRGB(144, 17, 255)
+                end
+                if color == "Red" then
+                    brick.Color = Color3.fromRGB(255, 0, 0)
+                end
+                if color == "Yellow" then
+                    brick.Color = Color3.fromRGB(255, 247, 0)
                 end
             end
         end
@@ -166,6 +217,7 @@ function PlayerUIHandler:UnloadBrickListButton(player)
     end
 end
 
+
 TogglePlayMode.OnServerEvent:Connect(PlayerUIHandler.UnloadBrickListButton)
 ChangeBrickList.OnServerEvent:Connect(PlayerUIHandler.BrickListButtonHandler)
 AddBrick.OnServerEvent:Connect(PlayerUIHandler.OnBrickListButtonClick)
@@ -173,5 +225,7 @@ OpenCreationSettings.OnServerEvent:Connect(PlayerUIHandler.CreationSettingsButto
 CloneBricks.OnServerEvent:Connect(PlayerUIHandler.CloneBricks)
 UpdateBrick.OnServerEvent:Connect(PlayerUIHandler.UpdateBrick)
 DeleteBrick.OnServerEvent:Connect(PlayerUIHandler.DeleteBrick)
+OpenColorList.OnServerEvent:Connect(PlayerUIHandler.LoadColorList)
+ColorChosen.OnServerEvent:Connect(PlayerUIHandler.SetBrickColor)
 
 return PlayerUIHandler
