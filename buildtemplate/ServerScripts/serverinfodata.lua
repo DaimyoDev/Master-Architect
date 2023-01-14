@@ -12,6 +12,8 @@ local SetPassword = game.ReplicatedStorage.SetPassword
 
 local ServerInfoData = {}
 
+ServerInfoData.builders = {}
+
 function ServerInfoData:LoadServerData(player)
 --check to see if there is any server info for this server
     local successServer, serverInfo = pcall(function()
@@ -32,7 +34,12 @@ function ServerInfoData:LoadServerData(player)
         if success then
             --if the builders list is not empty update the ServerInfoData.builders property
             if buildersList ~= {} or buildersList ~= nil then
-                OnBuilderListLoaded:Fire(buildersList)
+                if buildersList ~= nil then
+                    for index, builder in ipairs(buildersList) do
+                        table.insert(self.builders, builder)
+                    end
+                    OnBuilderListLoaded:Fire(buildersList)
+                end
             end
         end
     end
@@ -51,7 +58,7 @@ function ServerInfoData:SetOwner(player)
     if successOwner then
         if owner ~= nil then
             Owner.Value = owner
-            OnOwner:Fire(player.Name)
+            OnOwner:Fire(player)
             --fire event that owner has been set
             
         end
@@ -60,8 +67,13 @@ function ServerInfoData:SetOwner(player)
             local success, error = pcall(function()
                 serverOwner:SetAsync(player.Name, player.Name)
             end)
+            local successBuild, error = pcall(function() 
+                serverBuildersList:SetAsync(player.Name, self.builders)
+            end)
             if success then
-                --PlayerUIHandler.CreateCreationSettings()
+                Owner.Value = player.Name
+                OnOwner:Fire(player)
+                OnBuilderListLoaded:Fire(self.builders)
             end
         end
     end

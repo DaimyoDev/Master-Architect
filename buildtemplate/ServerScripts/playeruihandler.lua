@@ -131,17 +131,38 @@ function PlayerUIHandler:LoadBuildUI(builder)
             local PlayersList = game:GetService("Players"):GetPlayers()
             for index, player in ipairs(PlayersList) do
                 if player.Name == builder then
-                    player.PlayerGui.BuildUI.Enabled = true
+                    local success, error = pcall(function() 
+                        player.PlayerGui.BuildUI.Enabled = true
+                    end)
+                    if error then
+                        task.wait(5)
+                        player.PlayerGui.BuildUI.Enabled = true
+                    end
                 end
             end
         end
     end
 end
 
+function PlayerUIHandler:LoadBuildUIForOwner(player)
+    if player.Name == Owner.Value then
+        local success, error = pcall(function() 
+            player.PlayerGui.BuildUI.Enabled = true
+        end)
+        if error then
+            task.wait(5)
+            player.PlayerGui.BuildUI.Enabled = true
+        end
+    end
+
+end
+
 function PlayerUIHandler:LoadColorList(player)
+    print(player.Name)
     if player.Name then
         local isBuilder = table.find(PlayerUIHandler.buildersList, player.Name)
         if isBuilder ~= nil then
+            print("yay")
         player.PlayerGui.ColorsList.Enabled = true
         end
     end
@@ -180,6 +201,7 @@ function PlayerUIHandler:SetBrickColor(player, brickList, color)
                     brick.Color = Color3.fromRGB(255, 247, 0)
                 end
             end
+            player.PlayerGui.ColorsList.Enabled = false
         end
     end
 end

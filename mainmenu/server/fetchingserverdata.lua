@@ -28,9 +28,6 @@ function fetchingServerData.CheckForServer(player)
         TeleportOptions:SetTeleportData(teleportData)
         TeleportService:TeleportAsync(11960320745, {player}, TeleportOptions)
     end
-    if ownsServer ~= nil then
-        print(ownsServer)
-    end
 end
 
 return fetchingServerData
