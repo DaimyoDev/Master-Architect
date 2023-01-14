@@ -158,11 +158,9 @@ function PlayerUIHandler:LoadBuildUIForOwner(player)
 end
 
 function PlayerUIHandler:LoadColorList(player)
-    print(player.Name)
     if player.Name then
         local isBuilder = table.find(PlayerUIHandler.buildersList, player.Name)
         if isBuilder ~= nil then
-            print("yay")
         player.PlayerGui.ColorsList.Enabled = true
         end
     end
