@@ -2,7 +2,7 @@
 local ChangeBrickList = game.ReplicatedStorage.ChangeBrickList
 local CollectionService = game:GetService("CollectionService")
 local Owner = game:GetService("ServerStorage").Owner
-local brickList = {"Brick1x1", "Brick2x1", "Brick1x2", "Brick2x2", "Brick2x2x2", "Brick3x2", "Brick3x3", "Brick5x1", "Brick1x5x1"}
+local brickList = {"Brick1x1x1", "Brick2x1x1", "Brick1x1x2", "Brick2x1x2", "Brick2x2x2", "Brick3x1x2", "Brick3x1x3", "Brick5x1x1", "Brick1x5x1"}
 local AddBrick = game.ReplicatedStorage.AddBrick
 local TogglePlayMode = game.ReplicatedStorage.TogglePlayMode
 local OpenCreationSettings= game.ReplicatedStorage.OpenCreationSettings
@@ -31,25 +31,25 @@ function PlayerUIHandler:OnBrickListButtonClick(player, brickType)
                     newBrick.Anchored = true
                     newBrick.Position = Vector3.new(0, 5, 0)
                     
-                    if brickType == "Brick1x1" then
+                    if brickType == "Brick1x1x1" then
                         newBrick.Size = Vector3.new(1, 1, 1)
                     end
-                    if brickType == "Brick2x2" then
+                    if brickType == "Brick2x1x2" then
                         newBrick.Size = Vector3.new(2, 1, 2)
                     end
-                    if brickType == "Brick1x2" then
+                    if brickType == "Brick1x1x2" then
                         newBrick.Size = Vector3.new(1, 1, 2)
                     end
-                    if brickType == "Brick2x1" then
+                    if brickType == "Brick2x1x1" then
                         newBrick.Size = Vector3.new(2, 1, 1)
                     end
-                    if brickType == "Brick3x3" then
+                    if brickType == "Brick3x1x3" then
                         newBrick.Size = Vector3.new(3, 1, 3)
                     end
-                    if brickType == "Brick3x2" then
+                    if brickType == "Brick3x1x2" then
                         newBrick.Size = Vector3.new(3, 1, 2)
                     end
-                    if brickType == "Brick5x1" then
+                    if brickType == "Brick5x1x1" then
                         newBrick.Size = Vector3.new(5, 1, 1)
                     end
                     if brickType == "Brick2x2x2" then
