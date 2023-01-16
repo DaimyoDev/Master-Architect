@@ -171,20 +171,158 @@ function PlayerUIHandler:SetBrickColor(player, brickList, color)
         local isBuilder = table.find(PlayerUIHandler.buildersList, player.Name)
         if isBuilder ~= nil then
             for index, brick in ipairs(brickList) do
+                if color == "Asphalt" then
+                    brick.Color = Color3.fromRGB(32, 32, 32)
+                end
+                if color == "AutumnRed" then
+                    brick.Color = Color3.fromRGB(255, 73, 0)
+                end
+                if color == "AzureBlue" then
+                    brick.Color = Color3.fromRGB(0, 104, 204)
+                end
+                if color == "Beige" then
+                    brick.Color = Color3.fromRGB(255, 241, 190)
+                end
                 if color == "Black" then
                     brick.Color = Color3.fromRGB(0, 0, 0)
                 end
                 if color == "Blue" then
                     brick.Color = Color3.fromRGB(20, 24, 255)
                 end
+                if color == "BrickRed" then
+                    brick.Color = Color3.fromRGB(151, 0, 0)
+                end
+                if color == "BrilliantBlue" then
+                    brick.Color = Color3.fromRGB(62, 95, 138)
+                end
+                if color == "Bronze" then
+                    brick.Color = Color3.fromRGB(233, 134, 0)
+                end
                 if color == "Brown" then
                     brick.Color = Color3.fromRGB(95, 47, 15)
+                end
+                if color == "Bumblebee" then
+                    brick.Color = Color3.fromRGB(255, 213, 0)
+                end
+                if color == "Burgundy" then
+                    brick.Color = Color3.fromRGB(122, 0, 0)
+                end
+                if color == "CalmBlue" then
+                    brick.Color = Color3.fromRGB(118, 186, 255)
+                end
+                if color == "CandyRed" then
+                    brick.Color = Color3.fromRGB(255, 134, 134)
+                end
+                if color == "Charcoal" then
+                    brick.Color = Color3.fromRGB(30, 30, 30)
+                end
+                if color == "Cookie" then
+                    brick.Color = Color3.fromRGB(167, 103, 6)
+                end
+                if color == "Cream" then
+                    brick.Color = Color3.fromRGB(253, 244, 227)
+                end
+                if color == "Cyan" then
+                    brick.Color = Color3.fromRGB(0, 242, 231)
+                end
+                if color == "DarkGreen" then
+                    brick.Color = Color3.fromRGB(0, 62, 0)
+                end
+                if color == "FrenchRose" then
+                    brick.Color = Color3.fromRGB(204, 0, 75)
+                end
+                if color == "Gold" then
+                    brick.Color = Color3.fromRGB(210, 179, 16)
+                end
+                if color == "GrapePurple" then
+                    brick.Color = Color3.fromRGB(86, 0, 58)
+                end
+                if color == "GraphiteBlack" then
+                    brick.Color = Color3.fromRGB(28, 28, 28)
+                end
+                if color == "GraphiteGrey" then
+                    brick.Color = Color3.fromRGB(71, 74, 81)
                 end
                 if color == "Green" then
                     brick.Color = Color3.fromRGB(13, 135, 21)
                 end
+                if color == "Grey" then
+                    brick.Color = Color3.fromRGB(100, 100, 100)
+                end
+                if color == "HealthyGreen" then
+                    brick.Color = Color3.fromRGB(0, 114, 0)
+                end
+                if color == "HotPink" then
+                    brick.Color = Color3.fromRGB(250, 0, 220)
+                end
+                if color == "Ivory" then
+                    brick.Color = Color3.fromRGB(225, 204, 79)
+                end
+                if color == "Jade" then
+                    brick.Color = Color3.fromRGB(0, 161, 82)
+                end
+                if color == "KhakiGrey" then
+                    brick.Color = Color3.fromRGB(106, 95, 49)
+                end
+                if color == "Lavender" then
+                    brick.Color = Color3.fromRGB(167, 95, 141)
+                end
+                if color == "LightGrey" then
+                    brick.Color = Color3.fromRGB(150, 150, 150)
+                end
+                if color == "LightLime" then
+                    brick.Color = Color3.fromRGB(164, 255, 42)
+                end
+                if color == "LightOrange" then
+                    brick.Color = Color3.fromRGB(255, 184, 23)
+                end
+                if color == "Lime" then
+                    brick.Color = Color3.fromRGB(140, 219, 0)
+                end
+                if color == "Mahogany" then
+                    brick.Color = Color3.fromRGB(76, 47, 39)
+                end
+                if color == "CornYellow" then
+                    brick.Color = Color3.fromRGB(228, 160, 16)
+                end
+                if color == "MiddleBlue" then
+                    brick.Color = Color3.fromRGB(60, 109, 255)
+                end
+                if color == "MidGrey" then
+                    brick.Color = Color3.fromRGB(174, 174, 174)
+                end
+                if color == "Mint" then
+                    brick.Color = Color3.fromRGB(97, 255, 132)
+                end
+                if color == "OchreBrown" then
+                    brick.Color = Color3.fromRGB(149, 95, 32)
+                end
+                if color == "OffWhite" then
+                    brick.Color = Color3.fromRGB(222, 222, 222)
+                end
                 if color == "Orange" then
                     brick.Color = Color3.fromRGB(255, 170, 0)
+                end
+                if color == "PastelBlue" then
+                    brick.Color = Color3.fromRGB(163, 219, 220)
+                end
+                if color == "PastelPink" then
+                    brick.Color = Color3.fromRGB(255, 219, 220)
+                end
+                if color == "PastelPurple" then
+                    brick.Color = Color3.fromRGB(241, 209, 255)
+                end
+                if color == "PastelYellow" then
+                    brick.Color = Color3.fromRGB(248, 251, 128)
+                end
+                if color == "Peach" then
+                    brick.Color = Color3.fromRGB(255, 217, 181)
+                end
+                if color == "PearlGreen" then
+                    brick.Color = Color3.fromRGB(28, 84, 45)
+                end
+                if color == "PineBrown" then
+                    brick.Color = Color3.fromRGB(58, 32, 0)
                 end
                 if color == "Pink" then
                     brick.Color = Color3.fromRGB(255, 49, 245)
@@ -194,6 +332,36 @@ function PlayerUIHandler:SetBrickColor(player, brickList, color)
                 end
                 if color == "Red" then
                     brick.Color = Color3.fromRGB(255, 0, 0)
+                end
+                if color == "RedOrange" then
+                    brick.Color = Color3.fromRGB(201, 60, 32)
+                end
+                if color == "RoyalePurple" then
+                    brick.Color = Color3.fromRGB(95, 22, 250)
+                end
+                if color == "Rust" then
+                    brick.Color = Color3.fromRGB(193, 84, 5)
+                end
+                if color == "SaffronYellow" then
+                    brick.Color = Color3.fromRGB(245, 208, 51)
+                end
+                if color == "SalmonPink" then
+                    brick.Color = Color3.fromRGB(217, 80, 48)
+                end
+                if color == "SpringBud" then
+                    brick.Color = Color3.fromRGB(219, 255, 162)
+                end
+                if color == "SunYellow" then
+                    brick.Color = Color3.fromRGB(243, 159, 24)
+                end
+                if color == "Teal" then
+                    brick.Color = Color3.fromRGB(0, 166, 150)
+                end
+                if color == "Turquoise" then
+                    brick.Color = Color3.fromRGB(63, 136, 143)
+                end
+                if color == "White" then
+                    brick.Color = Color3.fromRGB(255, 255, 255)
                 end
                 if color == "Yellow" then
                     brick.Color = Color3.fromRGB(255, 247, 0)
