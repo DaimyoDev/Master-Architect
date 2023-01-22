@@ -2,12 +2,11 @@
 local ChangeBrickList = game.ReplicatedStorage.ChangeBrickList
 local CollectionService = game:GetService("CollectionService")
 local Owner = game:GetService("ServerStorage").Owner
-local brickList = {"Brick1x1x1", "Brick2x1x1", "Brick1x1x2", "Brick2x1x2", "Brick2x2x2", "Brick3x1x2", "Brick3x1x3", "Brick5x1x1", "Brick1x5x1"}
 local AddBrick = game.ReplicatedStorage.AddBrick
 local TogglePlayMode = game.ReplicatedStorage.TogglePlayMode
 local OpenCreationSettings= game.ReplicatedStorage.OpenCreationSettings
 local BrickSelected = game.ReplicatedStorage.BrickSelected
-local playMode = false
+local playMode = true
 local PlayerUIHandler = {}
 local CloneBricks = game.ReplicatedStorage.CloneBricks
 local UpdateBrick = game.ReplicatedStorage.UpdateBrick
@@ -20,70 +19,144 @@ PlayerUIHandler.buildersList = {}
 
 function PlayerUIHandler:OnBrickListButtonClick(player, brickType)
     if player.Name then
-        local isBrickType = table.find(brickList, brickType)
-        if isBrickType ~= nil then
-            local isBuilder = table.find(PlayerUIHandler.buildersList, player.Name)
-            if isBuilder ~= nil then
+        local isBuilder = table.find(PlayerUIHandler.buildersList, player.Name)
+        if isBuilder ~= nil then
 
-                    local newBrick = Instance.new("Part")
-                    newBrick.Parent = workspace
-                    newBrick.Name = "Brick"
-                    newBrick.Anchored = true
-                    newBrick.Position = Vector3.new(0, 5, 0)
+            local newBrick = Instance.new("Part")
+            newBrick.Parent = workspace
+            newBrick.Name = "Brick"
+            newBrick.Anchored = true
+            newBrick.Position = Vector3.new(0, 5, 0)
                     
-                    if brickType == "Brick1x1x1" then
-                        newBrick.Size = Vector3.new(1, 1, 1)
-                    end
-                    if brickType == "Brick2x1x2" then
-                        newBrick.Size = Vector3.new(2, 1, 2)
-                    end
-                    if brickType == "Brick1x1x2" then
-                        newBrick.Size = Vector3.new(1, 1, 2)
-                    end
-                    if brickType == "Brick2x1x1" then
-                        newBrick.Size = Vector3.new(2, 1, 1)
-                    end
-                    if brickType == "Brick3x1x3" then
-                        newBrick.Size = Vector3.new(3, 1, 3)
-                    end
-                    if brickType == "Brick3x1x2" then
-                        newBrick.Size = Vector3.new(3, 1, 2)
-                    end
-                    if brickType == "Brick5x1x1" then
-                        newBrick.Size = Vector3.new(5, 1, 1)
-                    end
-                    if brickType == "Brick2x2x2" then
-                        newBrick.Size = Vector3.new(2, 2, 2)
-                    end
-                    if brickType == "Brick1x5x1" then
-                        newBrick.Size = Vector3.new(1, 5, 1)
-                    end
-                    local clicked = false
-                    local clickDetector = Instance.new("ClickDetector")
-                    clickDetector.MaxActivationDistance = 90000000
-                    clickDetector.Parent = newBrick
-                    clickDetector.MouseClick:Connect(function(player)
-                        local isBuilder = table.find(PlayerUIHandler.buildersList, player.Name)
-                        if isBuilder ~= nil then
-                            if clicked == false then
-                                clicked = true
-                                newBrick.Transparency = 0.3
-                                CollectionService:AddTag(newBrick, "Selected")
-                                BrickSelected:FireClient(player, newBrick, clicked)
-                            else
-                                clicked = false
-                                CollectionService:RemoveTag(newBrick, "Selected")
-                                BrickSelected:FireClient(player, newBrick, clicked)
-                                newBrick.Transparency = 0
-                            end
-                        end
-                        
-                    end)
-                    player.PlayerGui.BrickList.Enabled = false
-                end
+            if brickType == "Brick1x1x1" then
+                newBrick.Size = Vector3.new(1, 1, 1)
             end
+            if brickType == "Brick1x1x2" then
+                newBrick.Size = Vector3.new(1, 1, 2)
+            end
+            if brickType == "Brick1x1x3" then
+                newBrick.Size = Vector3.new(1, 1, 3)
+            end
+            if brickType == "Brick1x1x4" then
+                newBrick.Size = Vector3.new(1, 1, 4)
+            end
+            if brickType == "Brick1x1x5" then
+                newBrick.Size = Vector3.new(1, 1, 5)
+            end
+            if brickType == "Brick1x2x1" then
+                newBrick.Size = Vector3.new(1, 2, 1)
+            end
+            if brickType == "Brick1x3x1" then
+                newBrick.Size = Vector3.new(1, 3, 1)
+            end
+            if brickType == "Brick1x5x1" then
+                newBrick.Size = Vector3.new(1, 5, 1)
+            end
+            if brickType == "Brick2x1x1" then
+                newBrick.Size = Vector3.new(2, 1, 1)
+            end
+            if brickType == "Brick2x1x2" then
+                newBrick.Size = Vector3.new(2, 1, 2)
+            end
+            if brickType == "Brick2x2x2" then
+                newBrick.Size = Vector3.new(2, 2, 2)
+            end
+            if brickType == "Brick2x3x2" then
+                newBrick.Size = Vector3.new(2, 3, 2)
+            end
+            if brickType == "Brick3x1x2" then
+                newBrick.Size = Vector3.new(3, 1, 2)
+            end
+            if brickType == "Brick3x1x3" then
+                newBrick.Size = Vector3.new(3, 1, 3)
+            end
+            if brickType == "Brick4x1x1" then
+                newBrick.Size = Vector3.new(4, 1, 1)
+            end
+            if brickType == "Brick4x1x2" then
+                newBrick.Size = Vector3.new(4, 1, 2)
+            end
+            if brickType == "Brick4x1x3" then
+                newBrick.Size = Vector3.new(4, 1, 3)
+            end
+            if brickType == "Brick5x1x1" then
+                newBrick.Size = Vector3.new(5, 1, 1)
+            end
+            if brickType == "Brick5x1x2" then
+                newBrick.Size = Vector3.new(5, 1, 2)
+            end
+            if brickType == "Brick5x1x5" then
+                newBrick.Size = Vector3.new(5, 1, 5)
+            end
+            if brickType == "Brick5x2x1" then
+                newBrick.Size = Vector3.new(5, 2, 1)
+            end
+            if brickType == "Brick5x2x2" then
+                newBrick.Size = Vector3.new(5, 2, 2)
+            end
+            if brickType == "Brick5x3x2" then
+                newBrick.Size = Vector3.new(5, 3, 2)
+            end
+            if brickType == "Brick5x3x3" then
+                newBrick.Size = Vector3.new(5, 3, 3)
+            end
+            if brickType == "Brick5x4x3" then
+                newBrick.Size = Vector3.new(5, 4, 3)
+            end
+            if brickType == "Brick5x4x4" then
+                newBrick.Size = Vector3.new(5, 4, 4)
+            end
+            if brickType == "Brick5x5x5" then
+                newBrick.Size = Vector3.new(5, 5, 5)
+            end
+            if brickType == "Brick6x1x1" then
+                newBrick.Size = Vector3.new(6, 1, 1)
+            end
+            if brickType == "Brick8x1x1" then
+                newBrick.Size = Vector3.new(8, 1, 1)
+            end
+            if brickType == "Brick8x1x8" then
+                newBrick.Size = Vector3.new(8, 1, 8)
+            end
+            if brickType == "Brick8x2x1" then
+                newBrick.Size = Vector3.new(8, 2, 1)
+            end
+            if brickType == "Brick8x3x1" then
+                newBrick.Size = Vector3.new(8, 3, 1)
+            end
+            if brickType == "Brick8x4x1" then
+                newBrick.Size = Vector3.new(8, 4, 1)
+            end
+            if brickType == "Brick8x5x1" then
+                newBrick.Size = Vector3.new(8, 5, 1)
+            end
+            if brickType == "Brick8x8x8" then
+                newBrick.Size = Vector3.new(8, 8, 8)
+            end
+            local clicked = false
+            local clickDetector = Instance.new("ClickDetector")
+            clickDetector.MaxActivationDistance = 90000000
+            clickDetector.Parent = newBrick
+            clickDetector.MouseClick:Connect(function(player)
+            local isBuilder = table.find(PlayerUIHandler.buildersList, player.Name)
+                if isBuilder ~= nil then
+                    if clicked == false then
+                        clicked = true
+                        newBrick.Transparency = 0.3
+                        CollectionService:AddTag(newBrick, "Selected")
+                        BrickSelected:FireClient(player, newBrick, clicked)
+                    else
+                        clicked = false
+                        CollectionService:RemoveTag(newBrick, "Selected")
+                        BrickSelected:FireClient(player, newBrick, clicked)
+                        newBrick.Transparency = 0
+                    end
+                end     
+            end)
+            player.PlayerGui.BrickList.Enabled = false
         end
     end
+end
 
 function PlayerUIHandler:CloneBricks(brick, brickCFrame)
     local clonedBrick = brick:Clone()
@@ -393,13 +466,9 @@ end
 
 function PlayerUIHandler:UnloadBrickListButton(player)
     if playMode == false then
-        player.PlayerGui.BuildUI.BrickListButton.Active = false
-        player.PlayerGui.BuildUI.BrickListButton.Visible = false
         TogglePlayMode:FireClient(player, "false")
         playMode = true
     else
-        player.PlayerGui.BuildUI.BrickListButton.Active = true
-        player.PlayerGui.BuildUI.BrickListButton.Visible = true
         TogglePlayMode:FireClient(player, "true")
         playMode = false
     end

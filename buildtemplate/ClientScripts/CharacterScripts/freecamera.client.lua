@@ -1,8 +1,4 @@
-local cameraSpawn = game.Workspace.CameraSpawn
 local camera = game.Workspace.CurrentCamera
-camera.CameraType = Enum.CameraType.Scriptable
-local position = Vector3.new(cameraSpawn.Position.x, cameraSpawn.Position.y + 4, cameraSpawn.Position.z)
-local lookAt = Vector3.new(cameraSpawn.Orientation.x - 50, cameraSpawn.Orientation.y, cameraSpawn.Orientation.z)
 local player = game.Players.LocalPlayer
 local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService") 
@@ -13,16 +9,18 @@ local velocityRight = CFrame.new(0.3, 0, 0)
 local sensitivity = 0.2
 local TogglePlayMode = game.ReplicatedStorage.TogglePlayMode
 local humanoidRootPart
-game.Workspace.CurrentCamera.CFrame = CFrame.new(position, lookAt)
 
 --if play mode then set camera type and change humanoid root part.
 
 player.CharacterAdded:Connect(function(character)
     local humanoid = character:WaitForChild("Humanoid")
+    humanoid.Died:Connect(function()
+        camera.CameraType = Enum.CameraType.Custom
+    end)
     humanoidRootPart = humanoid.RootPart
-    humanoidRootPart.Anchored = true
-    humanoidRootPart.CanCollide = false
 end)
+
+
 
 TogglePlayMode.OnClientEvent:Connect(function(playMode)
     if playMode == "false" then
