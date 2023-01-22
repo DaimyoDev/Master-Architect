@@ -79,6 +79,30 @@ function PlayerUIHandler:OnBrickListButtonClick(player, brickType)
             if brickType == "Brick4x1x3" then
                 newBrick.Size = Vector3.new(4, 1, 3)
             end
+            if brickType == "Brick4x1x3" then
+                newBrick.Size = Vector3.new(4, 1, 3)
+            end
+            if brickType == "Brick4x1x4" then
+                newBrick.Size = Vector3.new(4, 1, 4)
+            end
+            if brickType == "Brick4x2x1" then
+                newBrick.Size = Vector3.new(4, 2, 1)
+            end
+            if brickType == "Brick4x2x2" then
+                newBrick.Size = Vector3.new(4, 2, 2)
+            end
+            if brickType == "Brick4x3x1" then
+                newBrick.Size = Vector3.new(4, 3, 1)
+            end
+            if brickType == "Brick4x4x1" then
+                newBrick.Size = Vector3.new(4, 4, 1)
+            end
+            if brickType == "Brick4x4x4" then
+                newBrick.Size = Vector3.new(4, 4, 4)
+            end
+            if brickType == "Brick4x5x1" then
+                newBrick.Size = Vector3.new(4, 5, 1)
+            end
             if brickType == "Brick5x1x1" then
                 newBrick.Size = Vector3.new(5, 1, 1)
             end
