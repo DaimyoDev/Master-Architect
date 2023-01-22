@@ -26,7 +26,7 @@ function PlayerUIHandler:OnBrickListButtonClick(player, brickType)
             newBrick.Parent = workspace
             newBrick.Name = "Brick"
             newBrick.Anchored = true
-            newBrick.Position = Vector3.new(0, 5, 0)
+            newBrick.Position = player.Character.HumanoidRootPart.Position + Vector3.new(0, 5, 0)
                     
             if brickType == "Brick1x1x1" then
                 newBrick.Size = Vector3.new(1, 1, 1)
