@@ -27,136 +27,24 @@ function PlayerUIHandler:OnBrickListButtonClick(player, brickType)
             newBrick.Name = "Brick"
             newBrick.Anchored = true
             newBrick.Position = player.Character.HumanoidRootPart.Position + Vector3.new(0, 5, 0)
-                    
-            if brickType == "Brick1x1x1" then
-                newBrick.Size = Vector3.new(1, 1, 1)
+            local count = 0
+            local x, y, z
+            for index, character in ipairs(string.split(brickType, "x")) do
+                if count == 0 then
+                    x = tonumber(character)
+                end
+                if count == 1 then
+                    y = tonumber(character)
+                end
+                if count == 2 then
+                    z = tonumber(character)
+                end
+                count = count + 1
+                if count > 2 then
+                    count = 0
+                end
             end
-            if brickType == "Brick1x1x2" then
-                newBrick.Size = Vector3.new(1, 1, 2)
-            end
-            if brickType == "Brick1x1x3" then
-                newBrick.Size = Vector3.new(1, 1, 3)
-            end
-            if brickType == "Brick1x1x4" then
-                newBrick.Size = Vector3.new(1, 1, 4)
-            end
-            if brickType == "Brick1x1x5" then
-                newBrick.Size = Vector3.new(1, 1, 5)
-            end
-            if brickType == "Brick1x2x1" then
-                newBrick.Size = Vector3.new(1, 2, 1)
-            end
-            if brickType == "Brick1x3x1" then
-                newBrick.Size = Vector3.new(1, 3, 1)
-            end
-            if brickType == "Brick1x5x1" then
-                newBrick.Size = Vector3.new(1, 5, 1)
-            end
-            if brickType == "Brick2x1x1" then
-                newBrick.Size = Vector3.new(2, 1, 1)
-            end
-            if brickType == "Brick2x1x2" then
-                newBrick.Size = Vector3.new(2, 1, 2)
-            end
-            if brickType == "Brick2x2x2" then
-                newBrick.Size = Vector3.new(2, 2, 2)
-            end
-            if brickType == "Brick2x3x2" then
-                newBrick.Size = Vector3.new(2, 3, 2)
-            end
-            if brickType == "Brick3x1x2" then
-                newBrick.Size = Vector3.new(3, 1, 2)
-            end
-            if brickType == "Brick3x1x3" then
-                newBrick.Size = Vector3.new(3, 1, 3)
-            end
-            if brickType == "Brick4x1x1" then
-                newBrick.Size = Vector3.new(4, 1, 1)
-            end
-            if brickType == "Brick4x1x2" then
-                newBrick.Size = Vector3.new(4, 1, 2)
-            end
-            if brickType == "Brick4x1x3" then
-                newBrick.Size = Vector3.new(4, 1, 3)
-            end
-            if brickType == "Brick4x1x3" then
-                newBrick.Size = Vector3.new(4, 1, 3)
-            end
-            if brickType == "Brick4x1x4" then
-                newBrick.Size = Vector3.new(4, 1, 4)
-            end
-            if brickType == "Brick4x2x1" then
-                newBrick.Size = Vector3.new(4, 2, 1)
-            end
-            if brickType == "Brick4x2x2" then
-                newBrick.Size = Vector3.new(4, 2, 2)
-            end
-            if brickType == "Brick4x3x1" then
-                newBrick.Size = Vector3.new(4, 3, 1)
-            end
-            if brickType == "Brick4x4x1" then
-                newBrick.Size = Vector3.new(4, 4, 1)
-            end
-            if brickType == "Brick4x4x4" then
-                newBrick.Size = Vector3.new(4, 4, 4)
-            end
-            if brickType == "Brick4x5x1" then
-                newBrick.Size = Vector3.new(4, 5, 1)
-            end
-            if brickType == "Brick5x1x1" then
-                newBrick.Size = Vector3.new(5, 1, 1)
-            end
-            if brickType == "Brick5x1x2" then
-                newBrick.Size = Vector3.new(5, 1, 2)
-            end
-            if brickType == "Brick5x1x5" then
-                newBrick.Size = Vector3.new(5, 1, 5)
-            end
-            if brickType == "Brick5x2x1" then
-                newBrick.Size = Vector3.new(5, 2, 1)
-            end
-            if brickType == "Brick5x2x2" then
-                newBrick.Size = Vector3.new(5, 2, 2)
-            end
-            if brickType == "Brick5x3x2" then
-                newBrick.Size = Vector3.new(5, 3, 2)
-            end
-            if brickType == "Brick5x3x3" then
-                newBrick.Size = Vector3.new(5, 3, 3)
-            end
-            if brickType == "Brick5x4x3" then
-                newBrick.Size = Vector3.new(5, 4, 3)
-            end
-            if brickType == "Brick5x4x4" then
-                newBrick.Size = Vector3.new(5, 4, 4)
-            end
-            if brickType == "Brick5x5x5" then
-                newBrick.Size = Vector3.new(5, 5, 5)
-            end
-            if brickType == "Brick6x1x1" then
-                newBrick.Size = Vector3.new(6, 1, 1)
-            end
-            if brickType == "Brick8x1x1" then
-                newBrick.Size = Vector3.new(8, 1, 1)
-            end
-            if brickType == "Brick8x1x8" then
-                newBrick.Size = Vector3.new(8, 1, 8)
-            end
-            if brickType == "Brick8x2x1" then
-                newBrick.Size = Vector3.new(8, 2, 1)
-            end
-            if brickType == "Brick8x3x1" then
-                newBrick.Size = Vector3.new(8, 3, 1)
-            end
-            if brickType == "Brick8x4x1" then
-                newBrick.Size = Vector3.new(8, 4, 1)
-            end
-            if brickType == "Brick8x5x1" then
-                newBrick.Size = Vector3.new(8, 5, 1)
-            end
-            if brickType == "Brick8x8x8" then
-                newBrick.Size = Vector3.new(8, 8, 8)
-            end
+            newBrick.Size = Vector3.new(x, y, z)
             local clicked = false
             local clickDetector = Instance.new("ClickDetector")
             clickDetector.MaxActivationDistance = 90000000

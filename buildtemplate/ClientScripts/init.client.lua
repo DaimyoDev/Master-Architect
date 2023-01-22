@@ -12,8 +12,6 @@ local player = game:GetService("Players").LocalPlayer
 local colorsList = game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("ColorsList")
 local ColorChosen = game.ReplicatedStorage.ColorChosen
 local brickColorList = colorsList.BrickColor
-local Black, Blue, Brown, Green, Orange, Pink, Purple, Red, Yellow = brickColorList.Black, brickColorList.Blue, brickColorList.Brown, brickColorList.Green, brickColorList.Orange, brickColorList.Pink, brickColorList.Purple, brickColorList.Red, brickColorList.Yellow
-local Asphalt, AutumnRed, AzureBlue, Beige, BrickRed, BrilliantBlue, Bronze, Bumblebee, Burgundy, CalmBlue, CandyRed, Charcoal, Cookie, Cream, Cyan, DarkGreen, FrenchRose, Gold, GrapePurple, GraphiteBlack, GraphiteGrey, Grey, HealthyGreen, HotPink, Ivory, Jade, KhakiGrey, Lavender, LightGrey, LightLime, LightOrange, Lime, Mahogany, CornYellow, MiddleBlue, MidGrey, Mint, OchreBrown, OffWhite,  PastelBlue, PastelPink, PastelPurple, PastelYellow, Peach, PearlGreen, PineBrown, RedOrange, RoyalePurple, Rust, SaffronYellow, SalmonPink, SpringBud, SunYellow, Teal, Turquoise, White = brickColorList.Asphalt, brickColorList.AutumnRed, brickColorList.AzureBlue, brickColorList.Beige, brickColorList.BrickRed, brickColorList.BrilliantBlue, brickColorList.Bronze, brickColorList.Bumblebee, brickColorList.Burgundy, brickColorList.CalmBlue, brickColorList.CandyRed, brickColorList.Charcoal, brickColorList.Cookie, brickColorList.Cream, brickColorList.Cyan, brickColorList.DarkGreen, brickColorList.FrenchRose, brickColorList.Gold, brickColorList.GrapePurple, brickColorList.GraphiteBlack, brickColorList.GraphiteGrey, brickColorList.Grey, brickColorList.HealthyGreen, brickColorList.HotPink, brickColorList.Ivory, brickColorList.Jade, brickColorList.KhakiGrey, brickColorList.Lavender, brickColorList.LightGrey, brickColorList.LightLime, brickColorList.LightOrange, brickColorList.Lime, brickColorList.Mahogany, brickColorList.CornYellow, brickColorList.MiddleBlue, brickColorList.MidGrey, brickColorList.Mint, brickColorList.OchreBrown, brickColorList.OffWhite, brickColorList.PastelBlue, brickColorList.PastelPink, brickColorList.PastelPurple, brickColorList.PastelYellow, brickColorList.Peach, brickColorList.PearlGreen, brickColorList.PineBrown, brickColorList.RedOrange, brickColorList.RoyalePurple, brickColorList.Rust, brickColorList.SaffronYellow, brickColorList.SalmonPink, brickColorList.SpringBud, brickColorList.SunYellow, brickColorList.Teal, brickColorList.Turquoise, brickColorList.White
 
 for index, brickButton in ipairs(brickColorList:GetChildren()) do
     if brickButton.Name ~= "BrickGrid" then
@@ -90,19 +88,4 @@ end)
 
 BrickSelected.OnClientEvent:Connect(function(newBrick)
         moveBrick(newBrick)
-end)
-
-Asphalt.Activated:Connect(function() 
-    ColorChosen:FireServer(player, bricksSelected, "Asphalt")
-    colorsList.Enabled = false
-end)
-
-AutumnRed.Activated:Connect(function() 
-    ColorChosen:FireServer(player, bricksSelected, "AutumnRed")
-    colorsList.Enabled = false
-end)
-
-AzureBlue.Activated:Connect(function() 
-    ColorChosen:FireServer(player, bricksSelected, "AzureBlue")
-    colorsList.Enabled = false
 end)
