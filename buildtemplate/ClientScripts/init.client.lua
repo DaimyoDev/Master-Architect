@@ -58,6 +58,8 @@ UserInputService.InputBegan:Connect(function(input)
             brick.CFrame = brick.CFrame:ToWorldSpace(rotatedXCFrame)
         end
         if input.KeyCode == Enum.KeyCode.Delete then
+            table.remove(bricksSelected, index)
+            CollectionService:RemoveTag(brick, "Selected")
             DeleteBrick:FireServer(brick)
         end
         if input.KeyCode == Enum.KeyCode.C then
