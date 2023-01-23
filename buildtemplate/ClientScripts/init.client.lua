@@ -12,12 +12,24 @@ local player = game:GetService("Players").LocalPlayer
 local colorsList = game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("ColorsList")
 local ColorChosen = game.ReplicatedStorage.ColorChosen
 local brickColorList = colorsList.BrickColor
+local materialsList = game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("MaterialsList")
+local materialsListFrame = materialsList.Materials
+local MaterialChosen = game.ReplicatedStorage.MaterialChosen
 
 for index, brickButton in ipairs(brickColorList:GetChildren()) do
     if brickButton.Name ~= "BrickGrid" then
         brickButton.Activated:Connect(function()
         ColorChosen:FireServer(player, bricksSelected, brickButton.Name)
         colorsList.Enabled = false
+        end)
+    end
+end
+
+for index, materialButton in ipairs(materialsListFrame:GetChildren()) do
+    if materialButton.Name ~= "BrickGrid" then
+        materialButton.Activated:Connect(function()
+        MaterialChosen:FireServer(player, bricksSelected, materialButton.Name)
+        materialsList.Enabled = false
         end)
     end
 end

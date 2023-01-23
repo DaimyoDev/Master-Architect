@@ -13,6 +13,8 @@ local UpdateBrick = game.ReplicatedStorage.UpdateBrick
 local DeleteBrick = game.ReplicatedStorage.DeleteBrick
 local OpenColorList = game.ReplicatedStorage.OpenColorList
 local ColorChosen = game.ReplicatedStorage.ColorChosen
+local OpenMaterialList = game.ReplicatedStorage.OpenMaterialList
+local MaterialChosen = game.ReplicatedStorage.MaterialChosen
 
 PlayerUIHandler.buildersList = {}
 
@@ -75,6 +77,7 @@ function PlayerUIHandler:CloneBricks(brick, brickCFrame)
     clonedBrick.Transparency = 0
     clonedBrick.CFrame = brickCFrame
     clonedBrick.Parent = game.Workspace
+    clonedBrick.Material = brick.Material
     local clicked = false
     clonedBrick.ClickDetector.MouseClick:Connect(function(player)
         local isBuilder = table.find(PlayerUIHandler.buildersList, player.Name)
@@ -357,6 +360,34 @@ function PlayerUIHandler:SetBrickColor(player, brickList, color)
     end
 end
 
+function PlayerUIHandler:SetMaterial(player, brickList, material)
+    if player.Name then
+        local isBuilder = table.find(PlayerUIHandler.buildersList, player.Name)
+        if isBuilder ~= nil then
+            for index, brick in ipairs(brickList) do
+                for index, materialEnum in ipairs (Enum.Material:GetEnumItems()) do
+                    local newMaterial = tostring(materialEnum)
+                    local finalMaterialString = string.split(newMaterial, "Enum.Material.")
+                    if material == finalMaterialString[2] then
+                        print("yes")
+                        brick.Material = materialEnum
+                    end
+                end
+            end
+        end
+        player.PlayerGui.MaterialsList.Enabled = false
+    end
+end
+
+function PlayerUIHandler:LoadMaterialList(player)
+    if player.Name then
+        local isBuilder = table.find(PlayerUIHandler.buildersList, player.Name)
+        if isBuilder ~= nil then
+        player.PlayerGui.MaterialsList.Enabled = true
+        end
+    end
+end
+
 function PlayerUIHandler:LoadCreationSettingsButton(player)
     
 end
@@ -396,5 +427,7 @@ UpdateBrick.OnServerEvent:Connect(PlayerUIHandler.UpdateBrick)
 DeleteBrick.OnServerEvent:Connect(PlayerUIHandler.DeleteBrick)
 OpenColorList.OnServerEvent:Connect(PlayerUIHandler.LoadColorList)
 ColorChosen.OnServerEvent:Connect(PlayerUIHandler.SetBrickColor)
+OpenMaterialList.OnServerEvent:Connect(PlayerUIHandler.LoadMaterialList)
+MaterialChosen.OnServerEvent:Connect(PlayerUIHandler.SetMaterial)
 
 return PlayerUIHandler
